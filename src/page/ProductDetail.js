@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -18,6 +18,8 @@ const ProductDetail = () => {
 
   useEffect(() => {
     getProductDetail();
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
