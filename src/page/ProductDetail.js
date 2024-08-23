@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -8,28 +8,26 @@ const ProductDetail = () => {
   const {id} = useParams();
   const [product, setProduct] = useState(null);
 
-  const getProductDetail = async () => {
-    const url = `http://localhost:5000/products/${id}`;
+  const getProductDetail = useCallback(async () => {
+    let url = `https://my-json-server.typicode.com/JeongChan2/chan-hnm/products/${id}`;
     let response = await fetch(url);
     let data = await response.json();
-    console.log(data)
     setProduct(data);
-  }
+  },[id]);
 
   useEffect(() => {
     getProductDetail();
   
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[getProductDetail])
 
   return (
       <Container>
         <Row>
-          <Col className='product-img'>
+          <Col className='product-img col-md-6 col-12'>
             <img alt='' src={product?.img}></img>
           </Col>
 
-          <Col className='pad10 detail-info'>
+          <Col className='pad10 detail-info col-md-6 col-12'>
             <div className='pad10 detail-title'>{product?.title}</div>
             <div className='pad10 detail-price'>₩ {product?.price}</div>
             <div className='pad10 detail-choice'>{product?.choice?"Conscious choice":"　"}</div>
