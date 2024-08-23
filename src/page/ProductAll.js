@@ -4,9 +4,9 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
 const ProductAll = () => {
-  // eslint-disable-next-line no-unused-vars
+
   const [productList, setProductList] = useState([]);
-  const [query, setQuery] =useSearchParams();
+  const [query] =useSearchParams();
 
   const getProducts = useCallback(async () => {
     let searchQuery = query.get('q') || "";
