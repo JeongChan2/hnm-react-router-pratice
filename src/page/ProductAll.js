@@ -8,6 +8,7 @@ import { fetchProducts } from '../redux/reducers/productSlice';
 const ProductAll = () => {
 
   const productList = useSelector((state) => state.product.productList);
+  // eslint-disable-next-line no-unused-vars
   const [query, setQuery] =useSearchParams();
 
   const dispatch = useDispatch();

@@ -4,7 +4,6 @@ import './App.css';
 import ProductAll from './page/ProductAll';
 import Login from './page/Login';
 import NavBar from './component/NavBar';
-import { useState } from 'react';
 import PrivateRoute from './route/PrivateRoute';
 
 
@@ -16,7 +15,7 @@ import PrivateRoute from './route/PrivateRoute';
 // 6. 유저는 로그아웃할 수 있다.
 
 function App() {
-  const [authenticate, setAuthenticate] = useState(false) // 로그인 여부
+  
 
   return (
     <div>
