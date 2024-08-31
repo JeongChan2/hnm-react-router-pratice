@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import ProductCard from '../component/ProductCard';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/reducers/productSlice';
 
 const ProductAll = () => {
 
-  const [productList, setProductList] = useState([]);
-  const [query] =useSearchParams();
+  const productList = useSelector((state) => state.product.productList);
+  const [query, setQuery] =useSearchParams();
 
-  const getProducts = useCallback(async () => {
+  const dispatch = useDispatch();
+
+  const getProducts = useCallback(() => {
     let searchQuery = query.get('q') || "";
-    const url = `https://my-json-server.typicode.com/JeongChan2/chan-hnm/products?q=${searchQuery}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setProductList(data);
-    
-  },[query]);
+    dispatch(fetchProducts(searchQuery))
+  }, [query, dispatch]);
 
   useEffect(() => {
     getProducts();
@@ -25,8 +25,8 @@ const ProductAll = () => {
     <div>
       <Container>
         <Row>
-          {productList.map((menu) => (
-            <Col lg={3}><ProductCard item={menu}/></Col>
+          {productList.map((menu, index) => (
+            <Col lg={3} key={index}><ProductCard item={menu}/></Col>
           ))}
 
         </Row>
